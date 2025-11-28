@@ -66,6 +66,7 @@ def main():
             result_str = format_time_from_millis(duration_ms)
         except Exception as e:
             print(f"Ошибка при вычислении разницы: {e}")
+            final_task = 1
             print("Запуск файла final_task.py...")
             os.startfile("final_task.py")
             return
@@ -80,6 +81,8 @@ def main():
         print(f"Результат: {result_str} сохранён в duration_line.txt")
     else:
         print("\n")
+
+print(f"Значение переменной final_task: {final_task}")
 
 if final_task == 0:
     if __name__ == "__main__":
