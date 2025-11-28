@@ -1,0 +1,95 @@
+import re
+from datetime import timedelta
+
+print("Файл duration_line.py запущен")
+
+with open("number_line.txt", "r") as f:
+    number_line = int(f.read())
+
+final_task = 0
+
+def parse_time(time_str):
+    """Преобразует строку вида '00:06.880' в общее количество миллисекунд."""
+    parts = re.split(r'[:.]', time_str)
+    if len(parts) != 3:
+        raise ValueError(f"Неверный формат времени: {time_str}")
+    minutes = int(parts[0])
+    seconds = int(parts[1])
+    millis = int(parts[2])
+    return (minutes * 60 + seconds) * 1000 + millis
+
+def format_time_from_millis(total_millis):
+    """Преобразует миллисекунды в строку вида 'MM:SS.mmm'."""
+    total_seconds = total_millis // 1000
+    millis = total_millis % 1000
+    minutes = total_seconds // 60
+    seconds = total_seconds % 60
+    return f"{minutes:02d}:{seconds:02d}.{millis:03d}"
+
+def main():
+
+    # Шаг 2: найти n-ю строку с временной меткой в input.vtt
+    timestamp_pattern = re.compile(r'(\d{2}:\d{2}:\d{2}\.\d{3}|\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3}|\d{2}:\d{2}\.\d{3})')
+    matches = []
+
+    try:
+        with open("input.vtt", "r", encoding="utf-8") as f:
+            for line in f:
+                match = timestamp_pattern.search(line)
+                if match:
+                    matches.append((match.group(1), match.group(2)))
+    except FileNotFoundError:
+        print("Файл input.vtt не найден.")
+        print("Запуск файла other_file.py...")
+        os.startfile("other_file.py")
+        return
+              
+    # Шаг 3: проверить, есть ли n-я запись (нумерация с 1)
+    if number_line < 1 or number_line > len(matches):
+        print(f"Не найдено {number_line}-й временной метки.")
+        print("Запуск файла final_task.py...")
+        os.startfile("final_task.py")
+        return
+    
+    if final_task == 0:
+        start_str, end_str = matches[number_line - 1]  # потому что список с 0
+        print(f"Значение переменной start_str {start_str}")
+        print(f"Значение переменной end_str {end_str}")
+        
+        # Шаг 4: вычислить разницу
+        try:
+            start_ms = parse_time(start_str)
+            end_ms = parse_time(end_str)
+            duration_ms = end_ms - start_ms
+            if duration_ms < 0:
+                raise ValueError("Конечное время меньше начального")
+            result_str = format_time_from_millis(duration_ms)
+        except Exception as e:
+            print(f"Ошибка при вычислении разницы: {e}")
+            print("Запуск файла final_task.py...")
+            os.startfile("final_task.py")
+            return
+        
+        # Шаг 5: сохранить результат
+        with open("duration_line.txt", "w", encoding="utf-8") as f:
+            f.write(result_str)
+            
+        with open("start_time_str.txt", "w", encoding="utf-8") as f:
+            f.write(start_str)
+        
+        print(f"Результат: {result_str} сохранён в duration_line.txt")
+    else:
+        print("\n")
+
+if final_task == 0:
+    if __name__ == "__main__":
+        main()
+else:
+    print("\n")
+    
+if final_task == 0:
+    with open("send_command_to_piper.py", "r", encoding="utf-8") as f:
+        print("Запуск файла send_command_to_piper.py...")
+        exec(f.read())
+else:
+    print("Запуск send_command_to_piper.py отменён")
