@@ -39,8 +39,8 @@ try:
 
         command = [
             r"C:\Users\Admin\AppData\Roaming\Subtitle Edit\TextToSpeech\Piper\piper.exe",
-            "-m", "ar_JO-kareem-low.onnx",
-            "-c", "ar_JO-kareem-low.onnx.json",
+            "-m", "kk_KZ-issai-high.onnx",
+            "-c", "kk_KZ-issai-high.onnx.json",
             "-f", "out.wav"
         ]
 
