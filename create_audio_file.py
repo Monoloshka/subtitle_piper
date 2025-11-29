@@ -42,7 +42,7 @@ else:
     print(f"Значение переменной vtt_filename: {vtt_filename}")
 
 # Read the VTT file
-with open(vtt_filename, 'r') as file:
+with open(vtt_filename, 'r', encoding='utf-8') as file:
     lines = file.readlines()
 
 # Find the last line containing '-->'
@@ -88,5 +88,16 @@ print(f"Создан файл {wav_filename} с продолжительност
 
 print("Запуск файла number_line_set.py...")
 
-with open("number_line_set.py", "r", encoding="utf-8") as f:
-    exec(f.read())
+try:
+    with open("number_line_set.py", "r", encoding="utf-8") as f:
+        exec(f.read())
+except UnicodeDecodeError:
+    # Если UTF-8 не работает, пробуем другие кодировки
+    try:
+        with open("number_line_set.py", "r", encoding="cp1251") as f:
+            exec(f.read())
+    except UnicodeDecodeError:
+        with open("number_line_set.py", "r", encoding="latin-1") as f:
+            exec(f.read())
+except Exception as e:
+    print(f"Ошибка при запуске number_line_set.py: {e}")
