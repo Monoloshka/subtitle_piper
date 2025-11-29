@@ -10,7 +10,7 @@ print("Третья строка из input.vtt:", third_line)
 
 # Словарь соответствия языков и моделей
 mapping = {
-    "Language: ar": "ar_JO-kareem-low",
+    "Language: ar": "ar_JO-kareem-medium",
     "Language: bg": "bg_BG-dimitar-medium",
     "Language: ca": "ca_ES-upc_ona-medium",
     "Language: cs": "cs_CZ-jirka-medium",
