@@ -1,12 +1,12 @@
 import os
 
 try:
-    print("Запуск файла create_audio_file.py...")
+    print("Запуск файла vtt_clean.py...")
 
-    with open("create_audio_file.py", "r", encoding="utf-8") as f:
+    with open("vtt_clean.py", "r", encoding="utf-8") as f:
         exec(f.read())
 except Exception as e:
-    print(f"Ошибка запуска файла: {e}") 
+    print(f"Ошибка:{e}") 
     
 finally:
     input("Нажмите Enter для закрытия...")

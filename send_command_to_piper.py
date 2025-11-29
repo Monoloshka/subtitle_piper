@@ -7,11 +7,10 @@ try:
     # 1. Читаем номер строки
     with open("number_line.txt", "r") as f:
         number_line = int(f.read())
-
+    
     # 2. Читаем файл субтитров
     with open("input.vtt", "r", encoding="utf-8") as file:
         lines = file.readlines()
-
     # 3. Логика поиска текста
     count = 0
     current_text = ""
@@ -30,7 +29,14 @@ try:
                 break
 
     current_text = current_text.strip()
-
+    
+    with open("onnx_model_file.txt", "r", encoding="utf-8") as file:
+        linestxt = file.readlines()
+    
+    onnx_model_file = linestxt[0].strip()
+   
+    print("Используемая модель: onnx_model_file", onnx_model_file)
+    
     if found and current_text:
         print(f"Нашли текст: {current_text}")
 
@@ -39,8 +45,8 @@ try:
 
         command = [
             r"C:\Users\Admin\AppData\Roaming\Subtitle Edit\TextToSpeech\Piper\piper.exe",
-            "-m", "kk_KZ-issai-high.onnx",
-            "-c", "kk_KZ-issai-high.onnx.json",
+            "-m", f"{onnx_model_file}.onnx",
+            "-c", f"{onnx_model_file}.onnx.json",
             "-f", "out.wav"
         ]
 
@@ -48,7 +54,7 @@ try:
             command,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         )
 
         stdout_data, stderr_data = process.communicate(
