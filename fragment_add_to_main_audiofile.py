@@ -11,9 +11,24 @@ print(f"Значение переменной main: {main}")
 insert = AudioSegment.from_wav("out_speed_fixed.wav")
 print(f"Значение переменной insert: {insert}")
 
-minutes, rest = start_str.split(":")
-seconds = float(rest)
-start_ms = int((int(minutes) * 60 + seconds) * 1000)
+def parse_time_to_ms(time_str):
+    parts = time_str.split(":")
+
+    if len(parts) == 2:  # MM:SS.mmm
+        minutes = int(parts[0])
+        seconds = float(parts[1])
+        return int((minutes * 60 + seconds) * 1000)
+
+    elif len(parts) == 3:  # HH:MM:SS.mmm
+        hours = int(parts[0])
+        minutes = int(parts[1])
+        seconds = float(parts[2])
+        return int((hours * 3600 + minutes * 60 + seconds) * 1000)
+
+    else:
+        raise ValueError(f"Неверный формат start_str: {time_str}")
+
+start_ms = parse_time_to_ms(start_str)
 
 if start_ms + len(insert) > len(main):
     raise ValueError("Невозможно вставить: звук выходит за пределы основного трека")
