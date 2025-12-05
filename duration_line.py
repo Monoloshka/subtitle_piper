@@ -68,7 +68,8 @@ def main():
     # Шаг 3: проверить, есть ли n-я запись (нумерация с 1)
     if number_line < 1 or number_line > len(matches):
         print(f"Не найдено {number_line}-й временной метки.")
-        final_task = 1   # ← ВАЖНО: УСТАНАВЛИВАЕМ ОШИБКУ
+        final_task = 1
+        print(f"Значение переменной final_task: {final_task}")
         print("Запуск файла final_task.py...")
         os.startfile("final_task.py")
         return
@@ -91,6 +92,7 @@ def main():
     except Exception as e:
         print(f"Ошибка при вычислении разницы: {e}")
         final_task = 1
+        print(f"Значение переменной final_task: {final_task}")
         print("Запуск файла final_task.py...")
         os.startfile("final_task.py")
         return
@@ -104,9 +106,6 @@ def main():
 
     print(f"Результат: {result_str} сохранён в duration_line.txt")
 
-
-print(f"Значение переменной final_task: {final_task}")
-
 # Запуск main() — и только если final_task == 0
 if final_task == 0:
     if __name__ == "__main__":
@@ -117,6 +116,7 @@ else:
 # И только после main() — принимаем окончательное решение
 if final_task == 0:
     with open("send_command_to_piper.py", "r", encoding="utf-8") as f:
+        print(f"Значение переменной final_task: {final_task}")
         print("Запуск файла send_command_to_piper.py...")
         exec(f.read())
 else:
