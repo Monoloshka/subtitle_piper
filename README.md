@@ -18,7 +18,7 @@
 
 В командной строке установить все библиотеки через команду pip install: os, sys, struct, wave, re, datetime, timedelta, pydub, AudioSegment, subprocess, run но могут быть ошибки если библиотека уже имеется так что на такое не обращайте внимания.
 
-Если вы не хотите Windows в VirtualBox впускать в интернет то вы можете через команду в не VirtualBox при установленной Python скачать библеотеки: "pip download <назхвание билиотеки (wheel и setuptools тоже ставим библиотеки)> -d ./packages" а потом скаченные файлы отправляем в VirtualBox после выполняем команду "for %i in (packages\*.whl) do python -m pip install packages\%~nxi" после мы в Windows установленный вне VirtualBox копируем папку %userprofile%\AppData\Local\Programs\Python при условии что выше указанные библиотеки установлены в тот же путь на в VirtualBox и это нужно для покрытия сбоев установки библиотек
+Windows оригинальную опасно впускать в интернет (иначе через неделю не будет работать у вас) то вы можете через команду в не VirtualBox при установленной Python скачать библеотеки: "pip download <назхвание билиотеки (wheel и setuptools тоже ставим библиотеки)> -d ./packages" а потом скаченные файлы отправляем в VirtualBox после выполняем команду "for %i in (packages\*.whl) do python -m pip install packages\%~nxi" после мы в Windows установленный вне VirtualBox копируем папку %userprofile%\AppData\Local\Programs\Python при условии что выше указанные библиотеки установлены в тот же путь на в VirtualBox и это нужно для покрытия сбоев установки библиотек
 
 Список доступных языков для Balabolka есть в файле lang_id_select.py
 
