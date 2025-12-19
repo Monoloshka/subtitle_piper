@@ -30,7 +30,11 @@ Windows оригинальную опасно впускать в интерне
 
 В папке ver4 находится версия кода рассчитанная на работу с голосами AhoTTS Баскский и Галисийский но для скачивания этих голосов нужно будет зарегистрироватся на сайте AhoTTS https://aholab.ehu.eus/ahomytts/ потом скачать https://aholab.ehu.eus/aholab/ahosapi/ и запустить установщик и потом указать логин и пороль при установке в моем коде задействованы голоса Aitor м Brais.
 
-Внимание! Некоторые строки на Басском и Галисийском языке могут не озвучится из-за сбоев (код 3221225477) вне Python кода
+Внимание! Некоторые строки на Басском и Галисийском языке могут не озвучится из-за сбоев (код 3221225477, баг в файле AhoTTSEngine.dll)
+
+```
+8:58:48 PM		0	0.00	New Event	Error Source=Application Error Message=Faulting application name: python.exe, version: 3.13.7150.1013, time stamp: 0x689df05c Faulting module name: AhoTTSEngine.dll, version: 1.0.0.1, time stamp: 0x6908e2c9 Exception code: 0xc0000005 Fault offset: 0x000000000017c8a0 Faulting process id: 0x1dcc Faulting application start time: 0x1dc70a427b7978f Faulting application path: C:\Users\Admin\AppData\Local\Programs\Python\Python313\python.exe Faulting module path: C:\Program Files\Aholab\AhoSapi64\AhoTTSEngine.dll Report Id: 013dd0d0-7d45-477d-88e2-38ac59ee22cd Faulting package full name: ? Faulting package-relative application ID: ? 	0
+```
 
 Здесь тоже нужен рабочий SAPI для Баскского и Галисийского.
 
